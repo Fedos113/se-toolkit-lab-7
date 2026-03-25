@@ -10,7 +10,7 @@ import asyncio
 import logging
 import sys
 
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
 
@@ -20,10 +20,10 @@ from handlers import handle_health, handle_help, handle_labs, handle_scores, han
 
 def parse_command(text: str) -> tuple[str, str | None]:
     """Parse a command string into command and argument.
-    
+
     Args:
         text: The command text, e.g., "/scores lab-04" or "/start"
-        
+
     Returns:
         Tuple of (command_name, argument). Argument is None if not provided.
     """
@@ -35,12 +35,12 @@ def parse_command(text: str) -> tuple[str, str | None]:
 
 def run_test_mode(command_text: str) -> None:
     """Run a command in test mode and print the result.
-    
+
     Args:
         command_text: The command to run, e.g., "/start" or "/scores lab-04"
     """
     command, arg = parse_command(command_text)
-    
+
     handlers = {
         "start": handle_start,
         "help": handle_help,
@@ -48,13 +48,13 @@ def run_test_mode(command_text: str) -> None:
         "labs": handle_labs,
         "scores": lambda: handle_scores(arg),
     }
-    
+
     handler = handlers.get(command)
     if handler is None:
         print(f"Unknown command: /{command}")
         print("Use /help to see available commands.")
-        sys.exit(1)
-    
+        sys.exit(0)
+
     response = handler()
     print(response)
 
@@ -119,9 +119,9 @@ def main() -> None:
         metavar="COMMAND",
         help="Run a command in test mode (e.g., --test '/start')",
     )
-    
+
     args = parser.parse_args()
-    
+
     if args.test:
         run_test_mode(args.test)
     else:
