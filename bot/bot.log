@@ -1,0 +1,3 @@
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @fedor_lms_lab7_bot id=8787709565 - 'My LMS Bot'
+INFO:aiogram.event:Update id=619231035 is handled. Duration 593 ms by bot id=8787709565
